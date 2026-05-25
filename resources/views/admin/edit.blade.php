@@ -24,7 +24,6 @@
                     <form action="{{ route('users.update', $user->id) }}" method="POST">
                         @csrf
                         @method('PUT')
-
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Nama</label>
                             <input type="text" name="name"

@@ -10,14 +10,16 @@
           <a class="nav-link active" aria-current="page" href="#">dashboard</a>
           <li class="nav-item">
           <a class="nav-link" href="/users">Users</a>
+          <li class="nav-item">
+          <a class="nav-link" href="/products">Products</a>
+        </li>
         </li>
         </li>
       </ul>
-      <div>
-      <div class="ms-auto navbar-nav">
+      <div class="ms-auto">
         <form action="/logout" method="POST">
           @csrf
-          <button type="submit" class="btn-danger">Logout</button>
+          <button type="submit" class="btn btn-danger">Logout</button>
         </form>  
       </div>
     </div>
