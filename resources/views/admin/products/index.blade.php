@@ -1,61 +1,91 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Products</title>
 
-@section('content')
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
 
 <div class="container mt-5">
-    <h1>Data Produk</h1>
 
-    <a href="/products/create" class="btn btn-primary mb-3">
-        + Tambah Produk
+    <h1>Data Products</h1>
+
+    <a href="{{ route('products.create') }}"
+       class="btn btn-primary mb-3">
+
+        Tambah Product
+
     </a>
 
+    @if(session('success'))
+
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+
+    @endif
+
     <table class="table table-bordered">
-        <thead class="table-dark">
-            <tr>
-                <th>No</th>
-                <th>Kode Barang</th>
-                <th>Nama Barang</th>
-                <th>Satuan</th>
-                <th>Harga</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
 
-        <tbody>
-            @foreach($products as $item)
-            <tr>
-                <td>{{ $item->id }}</td>
-                <td>{{ $item->kode_barang }}</td>
-                <td>{{ $item->nama_barang }}</td>
-                <td>{{ $item->satuan }}</td>
-                <td>{{ $item->harga }}</td>
+        <tr>
+            <th>No</th>
+            <th>Kode Barang</th>
+            <th>Nama Barang</th>
+            <th>Satuan</th>
+            <th>Harga</th>
+            <th>Aksi</th>
+        </tr>
 
-                <td>
+        @foreach($products as $product)
 
-        <a href="/products/{{ $item->id }}/edit"
-           class="btn btn-warning btn-sm">
-            Edit
-        </a>
+        <tr>
 
-        <form action="/products/{{ $item->id }}"
-              method="POST"
-              style="display:inline;">
+            <td>{{ $loop->iteration }}</td>
 
-            @csrf
-            @method('DELETE')
+            <td>{{ $product->kode_barang }}</td>
 
-            <button type="submit"
-                    class="btn btn-danger btn-sm">
-                Hapus
-            </button>
+            <td>{{ $product->nama_barang }}</td>
 
-        </form>
+            <td>{{ $product->satuan }}</td>
 
-    </td>
-            </tr>
-            @endforeach
-        </tbody>
+            <td>{{ $product->harga }}</td>
+
+            <td>
+
+                <a href="{{ route('products.edit', $product->id) }}"
+                   class="btn btn-warning btn-sm">
+
+                    Edit
+
+                </a>
+
+                <form action="{{ route('products.destroy', $product->id) }}"
+                      method="POST"
+                      style="display:inline;">
+
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit"
+                            class="btn btn-danger btn-sm">
+
+                        Hapus
+
+                    </button>
+
+                </form>
+
+            </td>
+
+        </tr>
+
+        @endforeach
+
     </table>
+
 </div>
 
-@endsection
+</body>
+</html>

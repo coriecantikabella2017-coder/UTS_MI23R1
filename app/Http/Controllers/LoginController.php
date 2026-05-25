@@ -1,24 +1,43 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
+
 class LoginController extends Controller
 {
+    // halaman login
     public function showLoginForm()
     {
-    return view('auth.login');
+        return view('auth.login');
     }
+
+    // proses login
     public function loginUser(Request $request)
     {
-        $credentials = $request->only('email','password');
-        
-        if (auth()->attempt($credentials)){
-            return redirect()->route('dashboard')->with('success','Login successful.');
+        $credentials = $request->only('email', 'password');
+
+        if(auth()->attempt($credentials)) {
+
+            $request->session()->regenerate();
+
+            return redirect()->route('dashboard');
         }
-        return back()->withErrors(['email'=>'Invalid credentials.']);
+
+        return back()->withErrors([
+            'email' => 'Invalid credentials.'
+        ]);
     }
-    public function logoutUser()
+
+    // logout
+    public function logout(Request $request)
     {
         auth()->logout();
-        return redirect()->route('login')->with('success', 'Logged out successfully.');
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
 }

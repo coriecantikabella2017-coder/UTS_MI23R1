@@ -24,6 +24,7 @@
                     <form action="{{ route('users.update', $user->id) }}" method="POST">
                         @csrf
                         @method('PUT')
+
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Nama</label>
                             <input type="text" name="name"
@@ -37,13 +38,7 @@
                                 class="form-control @error('email') is-invalid @enderror"
                                 value="{{ old('email', $user->email) }}">
                         </div>
-                        
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Password</label>
-                            <input type="Password" name="Password"
-                                class="form-control @error('Password') is-invalid @enderror"
-                                value="{{ old('Password', $user->Password) }}">
-                        </div>
+
                         <div class="d-flex justify-content-between mt-4">
                             <a href="{{ route('users.index') }}" class="btn btn-secondary">
                                 ← Kembali
