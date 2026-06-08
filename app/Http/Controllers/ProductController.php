@@ -27,8 +27,8 @@ class ProductController extends Controller
         Product::create([
             'kode_barang' => $request->kode_barang,
             'nama_barang' => $request->nama_barang,
-            'satuan'      => $request->satuan,
-            'harga'       => $request->harga
+            'satuan'=> $request->satuan,
+            'harga'=> $request->harga
         ]);
 
         return redirect()->route('products.index')
@@ -51,8 +51,8 @@ class ProductController extends Controller
         $product->update([
             'kode_barang' => $request->kode_barang,
             'nama_barang' => $request->nama_barang,
-            'satuan'      => $request->satuan,
-            'harga'       => $request->harga
+            'satuan'=> $request->satuan,
+            'harga'=> $request->harga
         ]);
 
         return redirect()->route('products.index')

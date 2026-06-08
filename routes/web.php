@@ -3,6 +3,9 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\SaleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -36,5 +39,9 @@ Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update
 Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
 //
+Route::resource('users', UserController::class);
 Route::resource('products', ProductController::class);
+Route::resource('categories', CategoryController::class);
+Route::resource('customers', CustomerController::class);
+Route::resource('sales', SaleController::class);
 });
